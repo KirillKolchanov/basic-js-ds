@@ -1,4 +1,4 @@
-const { NotImplementedError } = require('../extensions/index.js');
+const { NotImplementedError } = require('../lib');
 
 const { ListNode } = require('../extensions/list-node.js');
 
@@ -28,7 +28,7 @@ class Queue {
   // puts the value at the end of the queue
   enqueue(value) {
     if (this.length === 0) {
-      this.head = new ListNode(value);
+      this.head = { value, next: null };
     } else {
       let current = this.head;
 
@@ -36,7 +36,7 @@ class Queue {
         current = current.next;
       }
 
-      current.next = new ListNode(value);
+      current.next = { value, next: null };
     }
     this.length++;
   }
@@ -44,7 +44,7 @@ class Queue {
   //retrieves a value from the head of the queue and deletes it
   dequeue() {
     if (this.length === 0) {
-      return null;
+      return undefined;
     } else {
       let head = this.head;
       this.head = head.next;
